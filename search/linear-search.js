@@ -1,16 +1,30 @@
-function linearSearch(arr, search) {
+function linearSearchFirstOccurance(arr, search) {
     let n = arr.length;
     
     for (let i = 0; i < n; i++) {
         if (arr[i] == search) {
-            return `${search} is present at index ${i} in the given array"`;
+            return `${search} is present at index ${i} in the given array - first occurance`;
         }
     }
 
-    return search + " is not present in the given array";
+    return `${search} is not present in the given array`;
 }
 
-let dsa = ["Array", "Stack", "Queue", "Linked List", "Tree", "Graph", "Hash Table", "Heap"];
-let search = "Stack";
+function linearSearchLastOccurance(arr, search) {
+    let n = arr.length;
+    let res = -1;
+    
+    for (let i = 0; i < n; i++) {
+        if (arr[i] == search) {
+            res = i;
+        }
+    }
 
-console.log(linearSearch(dsa, search));
+    return res == -1 ? `${search} is not present in the given array` : `${search} is present at index ${res} in the given array - last occurance`;
+}
+
+let dsa = [1, 2, 3, 3, 4, 5, 6, 7, 8];
+let search = 3;
+
+console.log(linearSearchFirstOccurance(dsa, search));
+console.log(linearSearchLastOccurance(dsa, search));
