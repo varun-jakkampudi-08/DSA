@@ -1,104 +1,53 @@
+// Javascript program to merge two sorted
+// linked lists recursively
 class Node {
-    constructor(data) {
-        this.data = data;
+    constructor(x) {
+        this.data = x;
         this.next = null;
     }
 }
 
-class LinkedList {
-    constructor() {
-        this.head = null;
+// Function to merge two sorted linked lists recursively
+function sortedMerge(head1, head2)  {
+
+    // Base cases
+    if (head1 === null)
+        return head2;
+    if (head2 === null)
+        return head1;
+
+    // Recursive merging based on smaller value
+    if (head1.data <= head2.data) {
+        head1.next = sortedMerge(head1.next, head2);
+        return head1;
     }
-
-    addFirst(data) {
-        let newnode = new Node(data);
-
-        if(!this.head) {
-            this.head = newnode;
-            return;
-        }
-
-        newnode.next = this.head;
-        this.head = newnode;
-    }
-
-    addLast(data) {
-        let newnode = new Node(data);
-        
-        if (!this.head) {
-            this.head = newnode;
-            return;
-        }
-        
-        let current = this.head;
-        
-        while(current.next) {
-            current = current.next;
-        }
-
-        current.next = newnode;
-    }
-
-    insertAt(data, index) {
-        if (index < 0) {
-            console.error("Error: Index cannot be negative.");
-            return;
-        }
-
-        if (index === 0) {
-            this.addFirst(data);
-            return;
-        }
-
-        const newnode = new Node(data);
-        let current = this.head;
-        let previous = null;
-        let count = 0;
-
-        while (count < index) {
-            if (current === null) {
-                console.error(`Error: Index ${index} is out of bounds.`);
-                return;
-            }
-            previous = current;
-            current = current.next;
-            count = count + 1;
-        }
-
-        newnode.next = current;
-        previous.next = newnode;
-    }
-
-    print() {
-        let current = this.head;
-        let res = 'HEAD -> ';
-        
-        while(current) {
-            res = res +  current.data + '->';
-            current = current.next;      
-        }
-
-        res = res + 'null';
-        console.log(res);
+    else {
+        head2.next = sortedMerge(head1, head2.next);
+        return head2;
     }
 }
 
-const list = new LinkedList();
-list.addLast(10);
-list.addLast(20);
-list.addLast(40);
-list.addLast(50);
-console.log("Original List:");
-list.print();
+function printList(curr) {
+    let result = "";
+    while (curr !== null) {
+        result += curr.data.toString();
+        if (curr.next !== null) {
+            result += " ";
+        }
+        curr = curr.next;
+    }
+    console.log(result);
+}
 
-// console.log("\nInserting 30 at index 2:");
-// list.insertAt(30, 2);
-// list.print();
+// First linked list: 5 -> 10 -> 15
+let head1 = new Node(5);
+head1.next = new Node(10);
+head1.next.next = new Node(15);
 
-// console.log("\nInserting 60 at the end (index 5):");
-// list.insertAt(60, 5);
-// list.print();
+// Second linked list: 2 -> 3 -> 20
+let head2 = new Node(2);
+head2.next = new Node(3);
+head2.next.next = new Node(20);
 
-// console.log("\nInserting 5 at the beginning (index 0):");
-// list.insertAt(5, 0);
-// list.print();
+let res = sortedMerge(head1, head2);
+printList(res);
