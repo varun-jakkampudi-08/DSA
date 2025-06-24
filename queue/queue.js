@@ -34,5 +34,5 @@ q.enqueue("2");
 q.enqueue("3");
 q.print()
 console.log(q.peek());
-q.dequeue("3");
+q.dequeue();
 q.print();

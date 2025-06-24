@@ -3,7 +3,7 @@ class Stack {
         this.items = [];
     }
 
-    add(value) {
+    push(value) {
         this.items.push(value);    
     }
 
@@ -29,10 +29,10 @@ class Stack {
 }
 
 let s = new Stack();
-s.add("1");
-s.add("2");
-s.add("3");
+s.push("1");
+s.push("2");
+s.push("3");
 s.print();
 console.log(s.peek());
-s.pop("3");
+s.pop();
 s.print();

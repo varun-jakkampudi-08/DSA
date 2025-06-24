@@ -75,26 +75,6 @@ class Graph {
     }
 
     DFS(start) {
-        let visited = {};
-        this.DFSUtil(start, visited);
-    }
-
-    DFSUtil(vert, visited) {
-        visited[vert] = true;
-        console.log(vert);
-
-        var getNeighbours = this.AdjList.get(vert);
-
-        for (let i in getNeighbours) {
-            let getElem = getNeighbours[i];
-
-            if (!visited[getElem]) {
-                this.DFSUtil(getElem, visited);
-            }
-        }
-    }
-
-    DFS(start) {
         let visited = new Set();
         const stack = [start];
 
